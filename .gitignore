@@ -1,0 +1,16 @@
+# 파이썬 캐시 파일
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C언어 및 기타 빌드/실행 파일
+*.exe
+*.out
+*.app
+
+# VSCode 임시 파일
+tempCodeRunnerFile.c
+.vscode/
+
+# 맥(Mac) OS 시스템 파일 (현재 맥북을 사용 중이시므로 필수)
+.DS_Store
