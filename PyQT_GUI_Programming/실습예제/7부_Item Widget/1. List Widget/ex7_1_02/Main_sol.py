@@ -70,7 +70,7 @@ class Form(QMainWindow, Ui_MainWindow):
             new_item = QListWidgetItem()
             new_item.setText('additem %d' % i)
             new_item.setFlags(new_item.flags() | Qt.ItemIsUserCheckable)
-            new_item.setCheckState(Qt.Unchecked)
+            new_item.setCheckState(Qt.Unchecked) #이렇게 초기 상태 해줘야 체크박스가 나온다.
             self.lstFrom.addItem(new_item)
 
     def addIcon(self):

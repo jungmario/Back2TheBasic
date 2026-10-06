@@ -23,8 +23,15 @@ class Form(QMainWindow, Ui_MainWindow):
         self.btnAddRow.clicked.connect(self.addRow)
         self.btnAddRow.setEnabled(False)
         self.btnSave.setEnabled(False)
+        self.tableWidget.itemChanged.connect(self.func)
+
+    def func(self, item): #문제는, 처음에 아무것도 없을 때 데이터 적을 때도 발생 -> 데이터 많아지면 개오바 -> signal 막기 필요
+        r, c = item.row(), item.column()
+        self.data[r+1][c] = item.text()
 
     def addRow(self):
+        #self.tableWidget.blockSignals(True)
+        #self.tableWidget.blockSignals(False) -> 위치는 다르겠지만..
         name = self.nameLineEdit.text()
         kor = self.korLineEdit.text()
         eng = self.engLineEdit.text()
@@ -36,10 +43,12 @@ class Form(QMainWindow, Ui_MainWindow):
             self.tableWidget.setItem(r, c, QTableWidgetItem(cell))
         self.tableWidget.resizeRowsToContents()
 
-    def loadFile(self):
+    def loadFile(self): #pandas 쓰지 않고 파이썬으로 파일 다루기
         with open('data.csv', 'r') as f:
             lines = f.readlines()
-        self.data = [l.rstrip().split(',') for l in lines if len(l.rstrip()) != 0]
+        print(lines)
+        self.data = [l.rstrip().split(',') for l in lines if len(l.rstrip()) != 0] # 2중 list로 읽어오기. rstrip : 공백문자 잘라내기
+        print(self.data)
         self.btnAddRow.setEnabled(True)
         self.btnSave.setEnabled(True)
         self.make_table()
@@ -57,9 +66,9 @@ class Form(QMainWindow, Ui_MainWindow):
 
         for r, record in enumerate(self.data[1::]):
             for c, cell in enumerate(record):
-                self.tableWidget.setItem(r, c, QTableWidgetItem(cell))
+                self.tableWidget.setItem(r, c, QTableWidgetItem(cell)) # 이거는 진짜 크랙이네
 
-        self.tableWidget.resizeColumnsToContents()
+        self.tableWidget.resizeColumnsToContents() #이건 안배운건데
         self.tableWidget.resizeRowsToContents()
 
 

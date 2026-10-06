@@ -18,8 +18,8 @@ class Form(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.btnAdd.clicked.connect(self.addMultiItem)
         self.btnRemove.clicked.connect(self.removeSingleItem)
-        self.btnUp.clicked.connect(lambda: self.moveUpDown(-1))
-        self.btnDown.clicked.connect(lambda: self.moveUpDown(1))
+        self.btnUp.clicked.connect(lambda: self.moveUpDown(1))
+        self.btnDown.clicked.connect(lambda: self.moveUpDown(-1))
         self.addList()
 
         self.lstItemFrom.itemSelectionChanged.connect(self.fromDisplayInfo)
@@ -46,7 +46,7 @@ class Form(QMainWindow, Ui_MainWindow):
 
     def addList(self):
         l = ['additem:%d' % x for x in range(1, 20)]
-        # self.lstItemFrom.addItems(l)
+        #self.lstItemFrom.addItems(l)
 
         for item in l:
             new_item = QListWidgetItem()

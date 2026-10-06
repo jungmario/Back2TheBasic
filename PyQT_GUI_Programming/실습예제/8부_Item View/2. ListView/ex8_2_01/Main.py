@@ -30,6 +30,14 @@ class Form(QMainWindow, Ui_MainWindow):
     def dataChange(self, index):
         print('data changed:', index.data())
 
+
+
+
+
+
+
+        
+
     def addRow(self, row):
         if not self.lineEdit.text():
             return

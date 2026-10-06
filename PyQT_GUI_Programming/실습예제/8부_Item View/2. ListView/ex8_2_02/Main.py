@@ -1,6 +1,7 @@
 import sys, subprocess, json
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
+from PyQt5.QtGui import QColor
 
 GUI_FILE_NAME = 'gui'
 subprocess.run([
@@ -24,7 +25,14 @@ class MyModel(QAbstractListModel):
     def data(self, index, role):
         if role == Qt.DisplayRole or role == Qt.EditRole:
             return self.strlist[index.row()]
-        return QVariant()
+        
+        if role == Qt.BackgroundRole:
+            if index.row() % 2 :
+                return QColor(Qt.green)
+            else : 
+                return QColor(Qt.red)
+        
+        return QVariant() # 어떤 객체든 다 받을 수 있는거 그냥 기본 디폴트 값의 의미.
 
     def flags(self, index):
         return Qt.ItemIsSelectable | Qt.ItemIsEnabled | Qt.ItemIsEditable
@@ -129,7 +137,7 @@ class Form(QMainWindow, Ui_MainWindow):
         l = []
         try:
             with open('list.json', 'r') as f:
-                l = json.load(f)
+                l = json.load(f) #json은 load로 읽는다. json vs pickle
             return l
         except Exception as e:
             print(type(e).__name__, e)

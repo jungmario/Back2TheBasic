@@ -58,7 +58,7 @@ class CameraThread(QThread):
                 #    QImage(data, width, height, bytesPerLine, format)를 전달 받음
                 bytes_per_line = ch * w
                 # 4. 넘파이(NumPy) 배열 형태의 이미지 데이터를 PyQt가 다룰 수 있는 QImage 객체로 변환
-                #    마지막 인자(QImage.Format_RGB888)는 픽셀당 8비트씩 RGB 3채널 형식을 의미
+                #    마지막 인자(QImage.Format_RGB888)는 픽셀당 8비트씩 RGB 3채널 형식을 의미, bytes_per_line이 좀 지저분한 Input. Qt이기에 Qimage로 바꿔주는것.
                 convert_to_qt_format = QImage(rgb_image.data, w, h, bytes_per_line, QImage.Format_RGB888)
                 # 5. QLabel 크기에 맞추기 위해 640x480 해상도로 조절하되, 
                 #    원본 영상의 가로세로 비율(Aspect Ratio)이 찌그러지지 않도록 유지하며 스케일링
